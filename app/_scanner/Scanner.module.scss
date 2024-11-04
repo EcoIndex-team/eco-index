@@ -1,0 +1,13 @@
+.container {
+	height: 70%;
+	width: 100%;
+	overflow: hidden;
+	border-radius: calc(50px - 1rem);
+
+	.video {
+		object-fit: cover;
+		height: 100%;
+		width: 100%;
+		background: black;
+	}
+}
