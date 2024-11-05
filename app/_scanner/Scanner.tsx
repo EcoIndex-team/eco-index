@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react'
 import styles from './Scanner.module.scss'
-import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from 'html5-qrcode'
+import {
+    Html5Qrcode,
+    Html5QrcodeScanner,
+    Html5QrcodeSupportedFormats,
+} from 'html5-qrcode'
 
 export default function Camera({ show }: { show: boolean }) {
     const [stream, setStream] = useState<boolean>(false)
@@ -10,40 +14,62 @@ export default function Camera({ show }: { show: boolean }) {
 
     useEffect(() => {
         if (show && cameraActivated === false) {
-            // cameraActivated = true
+            cameraActivated = true
             ;(async () => {
                 try {
                     const allowed = await navigator.mediaDevices
                         .getUserMedia({ video: true })
                         .then(() => (cameraActivated = true))
 
-                    function onScanSuccess(
-                        decodedText: any,
-                        decodedResult: any
-                    ) {
-                        // handle the scanned code as you like, for example:
-                        console.log('works')
-                        console.log(
-                            `Code matched = ${decodedText}`,
-                            decodedResult
-                        )
-                    }
-                    function onScanFailure(error: any) {
-                        // handle scan failure, usually better to ignore and keep scanning.
-                        // for example:
-                        console.warn(`Code scan error = ${error}`)
-                    }
-                    let html5QrcodeScanner = new Html5QrcodeScanner(
-                        'reader',
+                    const cameraId = await Html5Qrcode.getCameras()
+                    const html5QrCode = new Html5Qrcode('reader', {
+                        formatsToSupport: [0, 9],
+                        verbose: false,
+                    })
+                    html5QrCode.start(
+                        cameraId[0].id,
                         {
-                            fps: 10,
+                            fps: 5,
                             qrbox: { width: 250, height: 250 },
-                            formatsToSupport: [0, 9],
+                            // formatsToSupport: [0, 9],
                         },
-                        false
+                        (text, result) => {
+                            console.log(text)
+                        },
+                        (error) => {
+                            console.log(error)
+                        }
                     )
-                    // Html5QrcodeSupportedFormats.QR_CODE
-                    html5QrcodeScanner.render(onScanSuccess, onScanFailure)
+
+                    // function onScanSuccess(
+                    //     decodedText: any,
+                    //     decodedResult: any
+                    // ) {
+                    //     // handle the scanned code as you like, for example:
+                    //     console.log('works')
+                    //     console.log(
+                    //         `Code matched = ${decodedText}`,
+                    //         decodedResult
+                    //     )
+                    // }
+                    // function onScanFailure(error: any) {
+                    //     // handle scan failure, usually better to ignore and keep scanning.
+                    //     // for example:
+                    //     console.warn(`Code scan error = ${error}`)
+                    // }
+                    // let html5QrcodeScanner = new Html5QrcodeScanner(
+                    //     'reader',
+                    //     {
+                    //         fps: 5,
+                    //         qrbox: { width: 250, height: 250 },
+                    //         // qrbox: () => ({}),
+
+                    //         formatsToSupport: [0, 9],
+                    //     },
+                    //     false
+                    // )
+                    // // Html5QrcodeSupportedFormats.QR_CODE
+                    // html5QrcodeScanner.render(onScanSuccess, onScanFailure)
                     cameraActivated = true
                 } catch (error) {
                     console.log(
