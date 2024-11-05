@@ -3,65 +3,82 @@
 import CameraIcon from '@/public/components/CameraIcon'
 import HamburgerMenu from '@/public/components/HamburgerMenu'
 import natureBackground from '@/public/images/nature background.jpg'
-import './App.scss'
+import './page.scss'
 import { useState } from 'react'
 // import { products } from './products'
 import Camera from './_scanner/Scanner'
 
 interface Product {
-	name: string
-	CO2e_kg: number
-	impact_description: string
+    name: string
+    CO2e_kg: number
+    impact_description: string
 }
 
-function App() {
-	const [menuOpen, setMenuOpen] = useState(false)
+export default function Home() {
+    const [menuOpen, setMenuOpen] = useState(false)
 
-	// useEffect(() => {
+    // useEffect(() => {
 
-	// })
+    // })
 
-	// const root = document.querySelector(':root')
+    // const root = document.querySelector(':root')
 
-	return (
-		<>
-			<div className={`navbar-wrapper ${menuOpen ? 'menu-open' : ''}`}>
-				<nav className='navbar'>
-					{[
-						<button
-							className='button'
-							onClick={() => {
-								const navbarWrapper = document.querySelector('.navbar-wrapper') as HTMLDivElement
-								const navbarRect = (
-									document.querySelector('.navbar') as HTMLElement
-								).getBoundingClientRect()
-								navbarWrapper.style.setProperty('--navbar-width', `${navbarRect.width}px`)
-								navbarWrapper.style.setProperty('--navbar-height', `${navbarRect.height}px`)
-								setMenuOpen(!menuOpen)
-							}}>
-							<CameraIcon />
-						</button>,
-						<button className='button'>
-							<HamburgerMenu />
-						</button>,
-					].map((item, index, array) => [
-						item,
-						index != array.length - 1 && <div className='spacer'></div>,
-					])}
-				</nav>
-				<div className='navbar-menu'>{menuOpen && <Camera show={menuOpen} />}</div>
-			</div>
-			<div className='hero'>
-				<div className='background-wrapper'>
-					<img
+    return (
+        <>
+            <div className={`navbar-wrapper ${menuOpen ? 'menu-open' : ''}`}>
+                <nav className='navbar'>
+                    {[
+                        <button
+                            className='button'
+                            onClick={() => {
+                                // console.log(document.querySelector('.navbar'))
+                                const navbarWrapper = document.querySelector(
+                                    // `$'.navbarWrapper}`
+                                    '.navbar-wrapper'
+                                ) as HTMLDivElement
+                                const navbarRect = (
+                                    document.querySelector(
+                                        '.navbar'
+                                    ) as HTMLElement
+                                ).getBoundingClientRect()
+                                navbarWrapper.style.setProperty(
+                                    '--navbar-width',
+                                    `${navbarRect.width}px`
+                                )
+                                navbarWrapper.style.setProperty(
+                                    '--navbar-height',
+                                    `${navbarRect.height}px`
+                                )
+                                setMenuOpen(!menuOpen)
+                            }}
+                        >
+                            <CameraIcon />
+                        </button>,
+                        <button className='button'>
+                            <HamburgerMenu />
+                        </button>,
+                    ].map((item, index, array) => [
+                        item,
+                        index != array.length - 1 && (
+                            <div className='spacer'></div>
+                        ),
+                    ])}
+                </nav>
+                <div className='navbarMenu'>
+                    {menuOpen && <Camera show={menuOpen} />}
+                </div>
+            </div>
+            <div className='hero'>
+                <div className='backgroundWrapper'>
+                    {/* <img
 						src={natureBackground}
 						className='background'
-					/>
-				</div>
-				<h1 className='header'>EcoIndex</h1>
-			</div>
-			<main className='main'>
-				{/* {products.map((product: Product, i) => (
+					/> */}
+                </div>
+                <h1 className='header'>EcoIndex</h1>
+            </div>
+            <main className='main'>
+                {/* {products.map((product: Product, i) => (
 					<div key={i}>
 						<div className='title'>
 							<p>{product.name}</p>
@@ -72,7 +89,7 @@ function App() {
 						<p>{product.impact_description}</p>
 					</div>
 				))} */}
-			</main>
-		</>
-	)
+            </main>
+        </>
+    )
 }
