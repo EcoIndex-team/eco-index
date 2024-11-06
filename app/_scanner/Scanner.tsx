@@ -7,6 +7,10 @@ import {
     Html5QrcodeScanner,
     Html5QrcodeSupportedFormats,
 } from 'html5-qrcode'
+import handler from '../api/restapi'
+import API from '../api/api'
+import reader from '../api/restapi'
+import han from '../api/api'
 
 export default function Scanner({ show, width, height }: ScannerProps) {
     const [stream, setStream] = useState<boolean>(false)
@@ -52,6 +56,19 @@ export default function Scanner({ show, width, height }: ScannerProps) {
             })()
         }
     }, [show])
+
+    async function g() {
+        const a = await han()
+        // const response = await fetch('../api/api', {
+        //     method: 'GET',
+        //     body: reader()
+        // })
+        // const data = response.json()
+        // console.log(data)
+        console.log(a)
+    }
+
+    g()
 
     return (
         <div className={styles.container}>
