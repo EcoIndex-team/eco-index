@@ -1,34 +1,17 @@
 .container {
-    // position: absolute;
-    // top: ;
     height: 100%;
     width: 100%;
     padding: 1rem;
     border-radius: calc(50px - 1rem);
     overflow: hidden;
-    // background: transparent;
-    // background-color: rgba(128, 128, 128, 0.356);
+    background: transparent;
 
     .video {
-        object-fit: cover;
-        // height: 250px;
-        // width: 250px;
-        height: 80%;
+        height: fit-content;
         width: 100%;
-        background: transparent;
-        // background: black;
+        // background: transparent;
+        background-color: rgba(128, 128, 128);
         border-radius: calc(50px - 1rem);
         overflow: hidden;
-
-        :nth-child(2) {
-            height: 80%;
-            // width: 100%;
-
-            video {
-                object-fit: cover;
-                height: 100%;
-                width: 100%;
-            }
-        }
     }
 }

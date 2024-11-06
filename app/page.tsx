@@ -6,7 +6,7 @@ import natureBackground from '@/public/images/nature background.jpg'
 import s from './page.module.scss'
 import { useRef, useState } from 'react'
 import { products } from '@/constants/products'
-import Camera from './_scanner/Scanner'
+import Scanner from './_scanner/Scanner'
 import Image from 'next/image'
 
 interface Product {
@@ -82,7 +82,7 @@ export default function Home() {
                     ])}
                 </nav>
                 <div className={s.navbarMenu}>
-                    {menuOpen && <Camera show={menuOpen} />}
+                    {menuOpen && <Scanner show={menuOpen} />}
                 </div>
             </div>
             <div className={s.hero}>

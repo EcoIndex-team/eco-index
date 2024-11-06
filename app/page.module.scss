@@ -74,8 +74,8 @@
         .navbarMenu {
             background: #e9ffe5;
             box-shadow: rgba(0, 0, 0, 0.25) 0 4px 8px, #9dff8d 0 0 12px inset;
-            width: calc(100dvw - 2rem);
-            height: calc(100dvh - 2rem);
+            width: calc(100dvw - 4rem);
+            height: calc(70dvh - 4rem);
             animation: scaleMenu 0.25s ease;
             border-radius: 50px;
 
@@ -93,8 +93,8 @@
         border-radius: calc(var(--navbar-height) / 2);
     }
     100% {
-        width: calc(100dvw - 2rem);
-        height: calc(100dvh - 2rem);
+        width: calc(100dvw - 4rem);
+        height: calc(70dvh - 4rem);
         border-radius: 50px;
     }
 }

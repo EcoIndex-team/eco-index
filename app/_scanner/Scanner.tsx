@@ -8,8 +8,9 @@ import {
     Html5QrcodeSupportedFormats,
 } from 'html5-qrcode'
 
-export default function Camera({ show }: { show: boolean }) {
+export default function Scanner({ show, width, height }: ScannerProps) {
     const [stream, setStream] = useState<boolean>(false)
+    const divRef = useRef<HTMLDivElement>(null)
     let cameraActivated = false
 
     useEffect(() => {
@@ -23,54 +24,25 @@ export default function Camera({ show }: { show: boolean }) {
 
                     const cameraId = await Html5Qrcode.getCameras()
                     const html5QrCode = new Html5Qrcode('reader', {
-                        formatsToSupport: [0, 9],
                         verbose: false,
                     })
                     html5QrCode.start(
                         cameraId[0].id,
                         {
-                            fps: 5,
-                            qrbox: { width: 250, height: 250 },
-                            // formatsToSupport: [0, 9],
+                            fps: 10,
+                            qrbox: {
+                                width: width ?? 250,
+                                height: height ?? 200,
+                            },
                         },
                         (text, result) => {
-                            console.log(text)
+                            console.log(text, result)
+                            html5QrCode.stop()
                         },
                         (error) => {
                             console.log(error)
                         }
                     )
-
-                    // function onScanSuccess(
-                    //     decodedText: any,
-                    //     decodedResult: any
-                    // ) {
-                    //     // handle the scanned code as you like, for example:
-                    //     console.log('works')
-                    //     console.log(
-                    //         `Code matched = ${decodedText}`,
-                    //         decodedResult
-                    //     )
-                    // }
-                    // function onScanFailure(error: any) {
-                    //     // handle scan failure, usually better to ignore and keep scanning.
-                    //     // for example:
-                    //     console.warn(`Code scan error = ${error}`)
-                    // }
-                    // let html5QrcodeScanner = new Html5QrcodeScanner(
-                    //     'reader',
-                    //     {
-                    //         fps: 5,
-                    //         qrbox: { width: 250, height: 250 },
-                    //         // qrbox: () => ({}),
-
-                    //         formatsToSupport: [0, 9],
-                    //     },
-                    //     false
-                    // )
-                    // // Html5QrcodeSupportedFormats.QR_CODE
-                    // html5QrcodeScanner.render(onScanSuccess, onScanFailure)
-                    cameraActivated = true
                 } catch (error) {
                     console.log(
                         `The scanner did not respond due to the following error: ${error}`
@@ -83,8 +55,14 @@ export default function Camera({ show }: { show: boolean }) {
 
     return (
         <div className={styles.container}>
-            <div id='reader' className={styles.video} />
+            <div id='reader' ref={divRef} className={styles.video} />
             {/* <div id='reader' ref={divRef}></div> */}
         </div>
     )
+}
+
+type ScannerProps = {
+    show: boolean
+    width?: number
+    height?: number
 }
