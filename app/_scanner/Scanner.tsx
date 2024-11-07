@@ -7,10 +7,7 @@ import {
     Html5QrcodeScanner,
     Html5QrcodeSupportedFormats,
 } from 'html5-qrcode'
-import handler from '../api/restapi'
-import API from '../api/api'
-import reader from '../api/restapi'
-import han from '../api/api'
+import scraperApi from '../api/scraperApi'
 
 export default function Scanner({ show, width, height }: ScannerProps) {
     const [stream, setStream] = useState<boolean>(false)
@@ -58,14 +55,31 @@ export default function Scanner({ show, width, height }: ScannerProps) {
     }, [show])
 
     async function g() {
-        const a = await han()
+        let a = ''
+        await scraperApi(
+            `https://www.coop.se/handla/sok/?q=${7300156486318}`,
+            'search',
+            'href="/handla/varor/{}"'
+        ).then((result) => (a = result))
+        // console.log('a', a)
+        // console.log(`https://www.coop.se/handla/varor/${a}`)
+        console.log('a', a)
+        const b = await scraperApi(
+            `https://www.coop.se/handla/varor/${a}`,
+            'search',
+            'INGREDIENSER: {}'
+        )
+        console.log('b', b)
+        // console.log('b', b, 'a', a)
+        // 'href="/handla/varor/{}"'
+        // https://www.coop.se/handla/sok/?q=
         // const response = await fetch('../api/api', {
         //     method: 'GET',
         //     body: reader()
         // })
         // const data = response.json()
         // console.log(data)
-        console.log(a)
+        // console.log(b)
     }
 
     g()

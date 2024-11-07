@@ -1,21 +1,28 @@
 from requests_html import HTMLSession
 # __chromium_revision__ = '1263111'
-import sys
+from sys import argv
 
 session = HTMLSession()
 
-url = f"https://www.coop.se/handla/sok/?q={sys.argv[0]}"
-
+url = ''
+url = argv[1]
+# print(url)
+# print(argv[1])
+# print(argv[3])
 r = session.get(url)
 r.html.render(sleep=1, keep_page=True, scrolldown=1)
 
 product = ''
 
-if sys.argv[1] == 'find':
-  product = r.html.find(sys.argv[2])
-else: 
-  product = r.html.search('href="/handla/varor/{}"')
+if argv[2] == 'find':
+  product = r.html.find(argv[3])
+elif argv[2] == 'search': 
+  product = r.html.search(argv[3])
 
 # print(r.html)
+argv = []
+session.close()
+r.close()
+# print(product, end='\n')
 for item in product:
   print(item)
