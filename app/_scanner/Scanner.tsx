@@ -55,21 +55,30 @@ export default function Scanner({ show, width, height }: ScannerProps) {
     }, [show])
 
     async function g() {
-        let a = ''
-        await scraperApi(
-            `https://www.coop.se/handla/sok/?q=${7300156486318}`,
-            'search',
-            'href="/handla/varor/{}"'
-        ).then((result) => (a = result))
+        const a = await scraperApi(
+            {
+                barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${7300156486318}&amp;mode=desktop`,
+                action: 'find',
+                actionParams: 'img[alt="låg risk"]',
+            }
+            // {
+            //     barcode: `https://www.coop.se/handla/varor/`,
+            //     action: 'search',
+            //     actionParams: 'Jfr-pris: {}/lit',
+            // }
+            // {
+            //     barcode: `https://www.coop.se/handla/varor/`,
+            //     action: 'find',
+            //     // actionParams: '.mpl9oZN6.rnLahZtT',
+            //     actionParams: 'button',
+            //     // actionParams:
+            //     //     'div[data-product-information="Produktfakta"] > div > button.a9ShLV3j',
+            // }
+        )
+        console.log('a', a)
         // console.log('a', a)
         // console.log(`https://www.coop.se/handla/varor/${a}`)
-        console.log('a', a)
-        const b = await scraperApi(
-            `https://www.coop.se/handla/varor/${a}`,
-            'search',
-            'INGREDIENSER: {}'
-        )
-        console.log('b', b)
+
         // console.log('b', b, 'a', a)
         // 'href="/handla/varor/{}"'
         // https://www.coop.se/handla/sok/?q=
