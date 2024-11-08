@@ -36,9 +36,18 @@ export default function Scanner({ show, width, height }: ScannerProps) {
                                 height: height ?? 200,
                             },
                         },
-                        (text, result) => {
-                            console.log(text, result)
+                        async (text, result) => {
                             html5QrCode.stop()
+                            const a = await scraperApi({
+                                barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${parseInt(
+                                    text
+                                )}&amp;mode=desktop`,
+                                action: 'find',
+                                actionParams:
+                                    'div#OverviewGrid img:not(img[alt=""])',
+                            })
+
+                            console.log(a)
                         },
                         (error) => {
                             console.log(error)
@@ -55,30 +64,29 @@ export default function Scanner({ show, width, height }: ScannerProps) {
     }, [show])
 
     async function g() {
-        const a = await scraperApi(
-            {
-                barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${7300156486318}&amp;mode=desktop`,
-                action: 'find',
-                actionParams: 'img[alt="låg risk"]',
-            }
-            // {
-            //     barcode: `https://www.coop.se/handla/varor/`,
-            //     action: 'search',
-            //     actionParams: 'Jfr-pris: {}/lit',
-            // }
-            // {
-            //     barcode: `https://www.coop.se/handla/varor/`,
-            //     action: 'find',
-            //     // actionParams: '.mpl9oZN6.rnLahZtT',
-            //     actionParams: 'button',
-            //     // actionParams:
-            //     //     'div[data-product-information="Produktfakta"] > div > button.a9ShLV3j',
-            // }
-        )
-        console.log('a', a)
+        // const a = await scraperApi(
+        //     {
+        //         barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${7300156486318}&amp;mode=desktop`,
+        //         action: 'find',
+        //         actionParams: 'div#OverviewGrid img:not(img[alt=""])',
+        //     }
+        //     // {
+        //     //     barcode: `https://www.coop.se/handla/varor/`,
+        //     //     action: 'search',
+        //     //     actionParams: 'Jfr-pris: {}/lit',
+        //     // }
+        //     // {
+        //     //     barcode: `https://www.coop.se/handla/varor/`,
+        //     //     action: 'find',
+        //     //     // actionParams: '.mpl9oZN6.rnLahZtT',
+        //     //     actionParams: 'button',
+        //     //     // actionParams:
+        //     //     //     'div[data-product-information="Produktfakta"] > div > button.a9ShLV3j',
+        //     // }
+        // )
+        // console.log('a', a)
         // console.log('a', a)
         // console.log(`https://www.coop.se/handla/varor/${a}`)
-
         // console.log('b', b, 'a', a)
         // 'href="/handla/varor/{}"'
         // https://www.coop.se/handla/sok/?q=
