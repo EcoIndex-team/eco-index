@@ -23,3 +23,10 @@ export default async function scraperResultRetriever(
 
     return dataToSend
 }
+
+// () => {
+//     setTimeout(() => {
+//         document.querySelector('.B6JQ8bRz.odcxhOBR.uQoAqqx6.n1yxWvZ1 > button').click();
+
+//     }, 0)
+//   }

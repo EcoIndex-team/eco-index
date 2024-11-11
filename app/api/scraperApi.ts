@@ -13,19 +13,20 @@ export default async function scraperApi(firstScrape: Scrape) {
   const dataArray = data.split('>\r\n<')
   let harmIndication = 0
 
-  if (data === '') {
-    return 'Could not find any statistics for this item'
-  }
+  // if (data === '') {
+  //   return 'Could not find any statistics for this item'
+  // }
 
-  dataArray.forEach((statistic, i, arr) => {
-    const formattedStatistic = statistic.replace('�', 'x')
+  // dataArray.forEach((statistic, i, arr) => {
+  //   const formattedStatistic = statistic.replace('�', 'x')
 
-    harmIndication += levelsOfHarm.get(formattedStatistic.split('\'')[3])!
-  })
+  //   harmIndication += levelsOfHarm.get(formattedStatistic.split('\'')[3])!
+  // })
 
-  const result = 30 - harmIndication < 10 ? 'Good' : 30 - harmIndication > 20 ? 'Bad' : 'Neutral'
+  // const result = 30 - harmIndication < 10 ? 'Good' : 30 - harmIndication > 20 ? 'Bad' : 'Neutral'
 
-  return `Estimated harm on environment: ${harmIndication} (${result})`
+  // return `Estimated harm on environment: ${harmIndication} (${result})`
+  return data
 }
 
 type Scrape = {

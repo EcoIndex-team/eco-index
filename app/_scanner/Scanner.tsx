@@ -38,16 +38,17 @@ export default function Scanner({ show, width, height }: ScannerProps) {
                         },
                         async (text, result) => {
                             html5QrCode.stop()
-                            const a = await scraperApi({
-                                barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${parseInt(
-                                    text
-                                )}&amp;mode=desktop`,
-                                action: 'find',
-                                actionParams:
-                                    'div#OverviewGrid img:not(img[alt=""])',
-                            })
+                            // const a = await scraperApi({
+                            //     barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${parseInt(
+                            //         text
+                            //     )}&amp;mode=desktop`,
+                            //     action: 'find',
+                            //     // actionParams:
+                            //     //     'div#OverviewGrid img:not(img[alt=""])',
+                            //     actionParams: '.u-marginBmd',
+                            // })
 
-                            console.log(a)
+                            // console.log(a)
                         },
                         (error) => {
                             console.log(error)
@@ -64,6 +65,15 @@ export default function Scanner({ show, width, height }: ScannerProps) {
     }, [show])
 
     async function g() {
+        const a = await scraperApi({
+            barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${7300156486318}&amp;mode=desktop`,
+            action: 'find',
+            // actionParams:
+            //     'div#OverviewGrid img:not(img[alt=""])',
+            actionParams: 'button.u-marginBmd',
+        })
+
+        console.log(a)
         // const a = await scraperApi(
         //     {
         //         barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${7300156486318}&amp;mode=desktop`,
