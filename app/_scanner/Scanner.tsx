@@ -66,11 +66,13 @@ export default function Scanner({ show, width, height }: ScannerProps) {
 
     async function g() {
         const a = await scraperApi({
-            barcode: `https://www.coop-cdn.se/sustainabilityv2/?barcode=${7300156486318}&amp;mode=desktop`,
-            action: 'find',
+            storeName: 'coop',
+            // barcode: `7300156486318`,
+            barcode: `7340011448778`,
+            // action: 'find',
             // actionParams:
             //     'div#OverviewGrid img:not(img[alt=""])',
-            actionParams: 'button.u-marginBmd',
+            // actionParams: 'button.u-marginBmd',
         })
 
         console.log(a)

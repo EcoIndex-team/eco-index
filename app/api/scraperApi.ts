@@ -9,10 +9,11 @@ const levelsOfHarm = new Map([
 ])
 
 export default async function scraperApi(firstScrape: Scrape) {
-  const data = await scraperResultRetriever(firstScrape.barcode, firstScrape.action, firstScrape.actionParams)
+  const data = await scraperResultRetriever(firstScrape.storeName, firstScrape.barcode)
   const dataArray = data.split('>\r\n<')
   let harmIndication = 0
 
+  console.log('dd', data)
   // if (data === '') {
   //   return 'Could not find any statistics for this item'
   // }
@@ -30,7 +31,6 @@ export default async function scraperApi(firstScrape: Scrape) {
 }
 
 type Scrape = {
+  storeName: 'coop'
   barcode: string
-  action: 'find' | 'search'
-  actionParams: string
 }

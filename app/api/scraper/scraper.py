@@ -1,46 +1,41 @@
-from requests_html import HTMLSession
-# __chromium_revision__ = '1263111'
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver import Keys
+from selenium.webdriver.common.by import By
+from time import sleep
 from sys import argv
-import time
 
-session = HTMLSession()
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--window-size=%s" % "1920, 1080")
+driver = webdriver.Chrome(options=chrome_options)
+# driver = webdriver.Chrome()
+driver.get(f"https://www.coop.se/handla/sok/?q={argv[2]}")
+has_ran = False
 
-url = ''
-url1 = argv[1]
-# r = session.get(url1)
-# r.html.render(sleep=1, keep_page=False, scrolldown=1)
+class Stores:
+  def coop():
+    global has_ran
 
-# product1 = ''
+    try:
+      accept_button = driver.find_element(by=By.CSS_SELECTOR, value=".cmpboxbtn.cmpboxbtnyes.cmptxt_btn_yes")
+      if accept_button.is_displayed():
+        accept_button.send_keys(Keys.ENTER)
 
-# if argv[2] == 'find':
-#   product1 = r.html.find(argv[3])
-# elif argv[2] == 'search': 
-#   product1 = r.html.search(argv[3])
-r = session.get("https://www.coop.se/handla/varor/mejeri-agg/mjolk/mellanmjolk/mellanmjolk-7300156486318")
-# r.html.render(sleep=1, keep_page=True, scrolldown=1)
-r.html.render()
-# "B6JQ8bRz odcxhOBR uQoAqqx6 n1yxWvZ1"
+      located_url = driver.find_element(by=By.CSS_SELECTOR, value=".ProductTeaser-media > a").get_attribute('href')
+      driver.get(located_url)
 
-script = """() => {
-    setTimeout(() => {
-        document.querySelector('.B6JQ8bRz.odcxhOBR.uQoAqqx6.n1yxWvZ1  button').click();
+      data = driver.find_element(by=By.CSS_SELECTOR, value="div[data-product-information='Produktfakta'] > div > button")
+      data.send_keys(Keys.ENTER)
+      
+      ingredients = driver.find_element(by=By.CSS_SELECTOR, value=".mpl9oZN6.rnLahZtT > div > div")
 
-    }, 5000)
-  }"""
+      print(ingredients.text)
+      has_ran = True
+      driver.close()
+      driver.quit()
+    except:
+      Stores.coop()
 
-r.html.render(script=script, sleep=5)
-# print(r.html)
-
-product1 = ''
-time.sleep(6)
-
-if argv[2] == 'find':
-  product1 = r.html.find(argv[3])
-elif argv[2] == 'search': 
-  product1 = r.html.search(argv[3])
-
-r.close()
-session.close()
-
-for item in product1:
-  print(item)
+if argv[1] == 'coop' and not has_ran:
+  Stores.coop()
