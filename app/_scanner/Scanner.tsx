@@ -68,7 +68,7 @@ export default function Scanner({ show, width, height }: ScannerProps) {
         const a = await scraperApi({
             storeName: 'coop',
             // barcode: `7300156486318`,
-            barcode: `7340011448778`,
+            barcode: `4011800568511`,
             // action: 'find',
             // actionParams:
             //     'div#OverviewGrid img:not(img[alt=""])',
