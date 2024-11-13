@@ -22,8 +22,8 @@ export default async function scraperApi(firstScrape: Scrape) {
   const data = await scraperResultRetriever(firstScrape.storeName, firstScrape.barcode)
   const ingredients =
     data.replaceAll('�', 'x')
-      .replace('INGREDIENSER: ', '')
       .toLowerCase()
+      .replace('ingredienser: ', '')
       .split('kan innehxlla')[0]
 
   const dataArray = data.split('>\r\n<')
@@ -51,6 +51,6 @@ export default async function scraperApi(firstScrape: Scrape) {
 }
 
 type Scrape = {
-  storeName: 'coop'
+  storeName: 'coop' | 'ica'
   barcode: string
 }
