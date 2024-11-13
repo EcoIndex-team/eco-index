@@ -9,7 +9,7 @@ const levelsOfHarm = new Map([
 ])
 
 const commonHarmfullIngredientsIndication = new Map([
-  ['palmolja', 3], ['socker', 2], ['glukosfruktossirap', 2], ['glukossirap', 2], ['sockersirap', 2],
+  ['palmolja', 4], ['socker', 2], ['glukosfruktossirap', 2], ['glukossirap', 2], ['sockersirap', 2],
   ['vete', 1], ['havre', 1], ['rxg', 1], ['korn', 1], ['ris', 1], ['majs', 1], ['rapsolja', 2], ['mjxlk', 2], ['kakao', 2]
 ])
 
@@ -39,9 +39,9 @@ export default async function scraperApi(firstScrape: Scrape) {
     .filter(r => /[a-z]/.test(r)).forEach(item => {
       allIngredientsIndication += commonHarmfullIngredientsIndication.get(item) ?? 1
     })
-  console.log(data)
-  console.log(harmIndication)
-  console.log(allIngredientsIndication)
+  // console.log(data)
+  // console.log(harmIndication)
+  // console.log(allIngredientsIndication)
 
   const harmfullIngredientAmount = harmIndication / allIngredientsIndication
   const result = harmfullIngredientAmount <= 0.33 ? 'Good' : harmfullIngredientAmount >= 0.66 ? 'Bad' : 'Neutral'

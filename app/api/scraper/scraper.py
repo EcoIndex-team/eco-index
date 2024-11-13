@@ -5,11 +5,11 @@ from selenium.webdriver.common.by import By
 from time import sleep
 from sys import argv
 
-# chrome_options = Options()
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--window-size=%s" % "1920, 1080")
-# driver = webdriver.Chrome(options=chrome_options)
-driver = webdriver.Chrome()
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--window-size=%s" % "1920, 1080")
+driver = webdriver.Chrome(options=chrome_options)
+# driver = webdriver.Chrome()
 driver.get(f"https://www.coop.se/handla/sok/?q={argv[2]}")
 has_ran = False
 cookies_accepted = False
