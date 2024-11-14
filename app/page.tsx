@@ -4,7 +4,7 @@ import CameraIcon from '@/public/components/CameraIcon'
 import HamburgerMenu from '@/public/components/HamburgerMenu'
 import natureBackground from '@/public/images/nature background.jpg'
 import s from './page.module.scss'
-import { useRef, useState } from 'react'
+import { Fragment, ReactElement, useRef, useState } from 'react'
 import { products } from '@/constants/products'
 import Scanner from './_scanner/Scanner'
 import Image from 'next/image'
@@ -20,11 +20,25 @@ export default function Home() {
     const navbarWrapperRef = useRef<HTMLDivElement>(null)
     const navbarRef = useRef<HTMLElement>(null)
 
-    // useEffect(() => {
-
-    // })
-
-    // const root = document.querySelector(':root')
+    const navbarBtns: { img: ReactElement; func?: () => void }[] = [
+        {
+            img: <CameraIcon />,
+            func: () => {
+                navbarWrapperRef.current?.style.setProperty(
+                    '--navbar-width',
+                    `${navbarRef.current?.style.width}px`
+                )
+                navbarWrapperRef.current?.style.setProperty(
+                    '--navbar-height',
+                    `${navbarRef.current?.style.height}px`
+                )
+                setMenuOpen(!menuOpen)
+            },
+        },
+        {
+            img: <HamburgerMenu />,
+        },
+    ]
 
     return (
         <>
@@ -33,53 +47,16 @@ export default function Home() {
                 className={`${s.navbarWrapper} ${menuOpen ? s.menuOpen : ''}`}
             >
                 <nav ref={navbarRef} className={s.navbar}>
-                    {[
-                        <button
-                            className={s.button}
-                            // onClick={() => {
-                            //     // console.log(document.querySelector('.navbar'))
-                            //     const navbarWrapper = document.querySelector(
-                            //         // `$'.navbarWrapper}`
-                            //         '.navbar-wrapper'
-                            //     ) as HTMLDivElement
-                            //     const navbarRect = (
-                            //         document.querySelector(
-                            //             '.navbar'
-                            //         ) as HTMLElement
-                            //     ).getBoundingClientRect()
-                            //     navbarWrapper.style.setProperty(
-                            //         '--navbar-width',
-                            //         `${navbarRect.width}px`
-                            //     )
-                            //     navbarWrapper.style.setProperty(
-                            //         '--navbar-height',
-                            //         `${navbarRect.height}px`
-                            //     )
-                            //     setMenuOpen(!menuOpen)
-                            // }}
-                            onClick={() => {
-                                navbarWrapperRef.current?.style.setProperty(
-                                    '--navbar-width',
-                                    `${navbarRef.current?.style.width}px`
-                                )
-                                navbarWrapperRef.current?.style.setProperty(
-                                    '--navbar-height',
-                                    `${navbarRef.current?.style.height}px`
-                                )
-                                setMenuOpen(!menuOpen)
-                            }}
-                        >
-                            <CameraIcon />
-                        </button>,
-                        <button className={s.button}>
-                            <HamburgerMenu />
-                        </button>,
-                    ].map((item, index, array) => [
-                        item,
-                        index != array.length - 1 && (
-                            <div className={s.spacer}></div>
-                        ),
-                    ])}
+                    {navbarBtns.map((btn, i) => (
+                        <Fragment key={i}>
+                            <button className={s.button} onClick={btn.func}>
+                                {btn.img}
+                            </button>
+                            {i != navbarBtns.length - 1 && (
+                                <div className={s.spacer} />
+                            )}
+                        </Fragment>
+                    ))}
                 </nav>
                 <div className={s.navbarMenu}>
                     {menuOpen && <Scanner show={menuOpen} />}
@@ -92,10 +69,6 @@ export default function Home() {
                         alt=''
                         className={s.background}
                     />
-                    {/* <img
-						src={natureBackground}
-						className={s.background'
-					/> */}
                 </div>
                 <h1 className={s.header}>EcoIndex</h1>
             </div>
