@@ -56,7 +56,8 @@ export default function Scanner({ show, width, height }: ScannerProps) {
     async function g() {
         const a = await scraperApi({
             storeName: 'ica',
-            barcode: `4011800568511`,
+            // barcode: `4011800569518`,
+            barcode: `4011800569518`,
         })
 
         console.log(a)
