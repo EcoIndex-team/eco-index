@@ -1,6 +1,6 @@
 'use server'
 
-const { spawn } = require('child_process')
+import { spawn } from 'child_process'
 
 export default async function scraperResultRetriever(storeName, barcode) {
     if (!barcode) return 'barcode'

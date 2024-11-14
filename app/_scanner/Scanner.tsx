@@ -2,15 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react'
 import styles from './Scanner.module.scss'
-import {
-    Html5Qrcode,
-    Html5QrcodeScanner,
-    Html5QrcodeSupportedFormats,
-} from 'html5-qrcode'
+import { Html5Qrcode } from 'html5-qrcode'
 import scraperApi from '../api/scraperApi'
 
 export default function Scanner({ show, width, height }: ScannerProps) {
-    const [stream, setStream] = useState<boolean>(false)
+    // const [stream, setStream] = useState<boolean>(false)
     const divRef = useRef<HTMLDivElement>(null)
     let cameraActivated = false
 
@@ -19,9 +15,9 @@ export default function Scanner({ show, width, height }: ScannerProps) {
             cameraActivated = true
             ;(async () => {
                 try {
-                    const allowed = await navigator.mediaDevices
-                        .getUserMedia({ video: true })
-                        .then(() => (cameraActivated = true))
+                    // const allowed = await navigator.mediaDevices
+                    //     .getUserMedia({ video: true })
+                    //     .then(() => (cameraActivated = true))
 
                     const cameraId = await Html5Qrcode.getCameras()
                     const html5QrCode = new Html5Qrcode('reader', {
@@ -36,7 +32,7 @@ export default function Scanner({ show, width, height }: ScannerProps) {
                                 height: height ?? 200,
                             },
                         },
-                        async (text, result) => {
+                        async () => {
                             html5QrCode.stop()
                         },
                         (error) => {
@@ -47,7 +43,7 @@ export default function Scanner({ show, width, height }: ScannerProps) {
                     console.log(
                         `The scanner did not respond due to the following error: ${error}`
                     )
-                    setStream(false)
+                    // setStream(false)
                 }
             })()
         }

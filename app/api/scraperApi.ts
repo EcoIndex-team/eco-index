@@ -1,12 +1,12 @@
 import scraperResultRetriever from "./scraperResultRetriever"
 
-const levelsOfHarm = new Map([
-  ['lxg risk', 1],
-  ['relativt lxg', 2],
-  ['medelhxg risk', 3],
-  ['relativt hxg risk', 4],
-  ['mycket hxg risk', 5],
-])
+// const levelsOfHarm = new Map([
+//   ['lxg risk', 1],
+//   ['relativt lxg', 2],
+//   ['medelhxg risk', 3],
+//   ['relativt hxg risk', 4],
+//   ['mycket hxg risk', 5],
+// ])
 
 const commonHarmfullIngredientsIndication = new Map([
   ['palmolja', 4], ['socker', 2], ['glukosfruktossirap', 2], ['glukossirap', 2], ['sockersirap', 2],
