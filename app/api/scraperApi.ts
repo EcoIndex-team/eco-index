@@ -20,7 +20,7 @@ const commonHarmfullIngredientsList = [
 
 export default async function scraperApi(firstScrape: Scrape) {
   const data = await scraperResultRetriever(firstScrape.storeName, firstScrape.barcode)
-  alert(data)
+  // alert(data)
   console.log(data)
   const productInfo: Data = JSON.parse(data)
   const ingredients =
