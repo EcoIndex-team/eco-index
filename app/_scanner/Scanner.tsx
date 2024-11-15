@@ -35,7 +35,7 @@ export default function Scanner({ show, width, height }: ScannerProps) {
                     }
 
                     const onFailure = (error: string) => {
-                        console.log(error)
+                        alert(error)
                     }
 
                     const scannerConfig = {
