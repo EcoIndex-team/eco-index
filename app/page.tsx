@@ -40,7 +40,7 @@ export default function Home() {
         {
             img: <HamburgerMenu />,
             func: () => {
-                router.push('/result/')
+                router.push(`/result/ica/${4011800569518}/`)
             },
         },
     ]
