@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import natureBackground from '@/public/images/nature background.jpg'
 import './globals.scss'
 
 export const metadata: Metadata = {
@@ -13,7 +15,19 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body>{children}</body>
+            <body>
+                <div className='hero'>
+                    <div className='backgroundWrapper'>
+                        <Image
+                            src={natureBackground}
+                            alt='hero img'
+                            className='background'
+                        />
+                    </div>
+                    <h1 className='header'>EcoIndex</h1>
+                </div>
+                <main className='main'>{children}</main>
+            </body>
         </html>
     )
 }

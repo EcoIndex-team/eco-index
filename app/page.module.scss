@@ -99,91 +99,29 @@
     }
 }
 
-.hero {
-    width: 100%;
-    height: 30%;
-
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    bottom: unset;
-
-    .backgroundWrapper {
-        position: absolute;
-        inset: 0;
-        bottom: -40px;
-
-        .background {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-
-            filter: brightness(70%);
-        }
-    }
-
-    .header {
-        color: #baffaf;
-
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        translate: -50% -50%;
-
-        text-shadow: rgba(0, 0, 0, 0.25) 0 4px 8px;
-        font-weight: 900;
-        font-size: 4rem;
-    }
-}
-
-.main {
-    width: 100%;
-    height: 70%;
-    max-height: 70%;
-    // height: 100%;
-
-    background: white;
-
-    position: absolute;
-    inset: 0;
-    top: 30dvh;
-    bottom: unset;
-
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-
+.item {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    width: 80%;
+    margin-inline: auto;
+    gap: 0.5rem;
 
-    padding-block: 2rem 8rem;
-
-    overflow-y: auto;
-
-    div {
+    > .title {
         display: flex;
-        flex-direction: column;
-        width: 80%;
-        margin-inline: auto;
-        gap: 0.5rem;
-
-        > .title {
-            display: flex;
-            flex-direction: row;
-            // margin-inline: 0;
-            justify-content: space-between;
-            width: 100%;
-
-            p {
-                width: fit-content;
-                font-weight: bold;
-            }
-        }
+        flex-direction: row;
+        // margin-inline: 0;
+        justify-content: space-between;
+        width: 100%;
 
         p {
-            width: 100%;
-            word-wrap: break-word;
-            text-align: center;
+            width: fit-content;
+            font-weight: bold;
         }
+    }
+
+    p {
+        width: 100%;
+        word-wrap: break-word;
+        text-align: center;
     }
 }

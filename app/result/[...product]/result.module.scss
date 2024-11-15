@@ -1,0 +1,70 @@
+.product {
+    display: flex;
+    padding: 1rem;
+    width: 100%;
+
+    img {
+        aspect-ratio: 1;
+        height: 100%;
+        box-shadow: 0 4px 5px -2px gray;
+        border-radius: 1rem;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+
+        .name {
+            width: 100%;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .metadata {
+            width: 100%;
+            text-align: right;
+
+            span {
+                color: gray;
+                font-weight: bold;
+
+                &:nth-child(1) {
+                    font-size: 0.6rem;
+                }
+
+                &:nth-child(2) {
+                    font-size: 0.8rem;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+
+        .harm {
+            margin-top: auto;
+            margin-left: 0.5rem;
+            width: 100%;
+            font-weight: 900;
+            font-size: 1.2rem;
+
+            span {
+                display: inline-block;
+                width: 1.2rem;
+                height: 1.2rem;
+                margin-inline: 0.5rem;
+                border-radius: 100vh;
+
+                &[data-score='low'] {
+                    background-color: rgb(0, 255, 0);
+                }
+
+                &[data-score='medium'] {
+                    background-color: yellow;
+                }
+
+                &[data-score='high'] {
+                    background-color: red;
+                }
+            }
+        }
+    }
+}

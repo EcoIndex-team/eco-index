@@ -8,6 +8,7 @@ import { Fragment, ReactElement, useRef, useState } from 'react'
 import { products } from '@/constants/products'
 import Scanner from './_scanner/Scanner'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 interface Product {
     name: string
@@ -19,6 +20,7 @@ export default function Home() {
     const [menuOpen, setMenuOpen] = useState(false)
     const navbarWrapperRef = useRef<HTMLDivElement>(null)
     const navbarRef = useRef<HTMLElement>(null)
+    const router = useRouter()
 
     const navbarBtns: { img: ReactElement; func?: () => void }[] = [
         {
@@ -37,6 +39,9 @@ export default function Home() {
         },
         {
             img: <HamburgerMenu />,
+            func: () => {
+                router.push('/result/')
+            },
         },
     ]
 
@@ -62,33 +67,21 @@ export default function Home() {
                     {menuOpen && <Scanner show={menuOpen} />}
                 </div>
             </div>
-            <div className={s.hero}>
-                <div className={s.backgroundWrapper}>
-                    <Image
-                        src={natureBackground}
-                        alt=''
-                        className={s.background}
-                    />
-                </div>
-                <h1 className={s.header}>EcoIndex</h1>
-            </div>
-            <main className={s.main}>
-                {!menuOpen && (
-                    <>
-                        {products.map((product: Product, i) => (
-                            <div key={i}>
-                                <div className={s.title}>
-                                    <p>{product.name}</p>
-                                    <p>
-                                        {product.CO2e_kg}kg CO<sub>2</sub>e/kg
-                                    </p>
-                                </div>
-                                <p>{product.impact_description}</p>
+            {!menuOpen && (
+                <>
+                    {products.map((product: Product, i) => (
+                        <div key={i} className={s.item}>
+                            <div className={s.title}>
+                                <p>{product.name}</p>
+                                <p>
+                                    {product.CO2e_kg}kg CO<sub>2</sub>e/kg
+                                </p>
                             </div>
-                        ))}
-                    </>
-                )}
-            </main>
+                            <p>{product.impact_description}</p>
+                        </div>
+                    ))}
+                </>
+            )}
         </>
     )
 }

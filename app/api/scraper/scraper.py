@@ -6,11 +6,11 @@ from time import sleep
 from sys import argv
 import json
 
-# chrome_options = Options()
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--window-size=%s" % "1920, 1080")
-# driver = webdriver.Chrome(options=chrome_options)
-driver = webdriver.Chrome()
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--window-size=%s" % "1920, 1080")
+driver = webdriver.Chrome(options=chrome_options)
+# driver = webdriver.Chrome()
 has_ran = False
 cookies_accepted = False
 retries = 0

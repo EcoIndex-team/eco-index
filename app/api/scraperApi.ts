@@ -20,6 +20,7 @@ const commonHarmfullIngredientsList = [
 
 export default async function scraperApi(firstScrape: Scrape) {
   const data = await scraperResultRetriever(firstScrape.storeName, firstScrape.barcode)
+  console.log(data)
   const productInfo: Data = JSON.parse(data)
   const ingredients =
     productInfo.ingredients.replaceAll('�', 'x')
@@ -45,10 +46,10 @@ export default async function scraperApi(firstScrape: Scrape) {
   console.log(allIngredientsIndication)
 
   const harmfullIngredientAmount = harmIndication / allIngredientsIndication
-  const result = harmfullIngredientAmount <= 0.33 ? 'Good' : harmfullIngredientAmount >= 0.66 ? 'Bad' : 'Neutral'
+  const result = harmfullIngredientAmount <= 0.33 ? 'low' : harmfullIngredientAmount >= 0.66 ? 'high' : 'medium'
 
   return {
-    harm: `Estimated harm on environment: ${harmfullIngredientAmount}% (${result})`,
+    harm: result,
     brand: productInfo.brand,
     name: productInfo.name,
     img: productInfo.img
@@ -68,4 +69,11 @@ type Data = {
   img: string,
   brand: string,
   ingredients: string
+}
+
+export type ScraperResponse = {
+  harm: string
+  brand: string
+  name: string
+  img: string
 }

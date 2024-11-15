@@ -4,9 +4,13 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Scanner.module.scss'
 import { Html5Qrcode } from 'html5-qrcode'
 import scraperApi from '../api/scraperApi'
+// import { useScanner } from '@/hooks/useScanner'
+import { useRouter } from 'next/navigation'
 
 export default function Scanner({ show, width, height }: ScannerProps) {
     // const [stream, setStream] = useState<boolean>(false)
+    const router = useRouter()
+    // const { scrape } = useScanner()
     const divRef = useRef<HTMLDivElement>(null)
     let cameraActivated = false
 
@@ -23,22 +27,44 @@ export default function Scanner({ show, width, height }: ScannerProps) {
                     const html5QrCode = new Html5Qrcode('reader', {
                         verbose: false,
                     })
-                    html5QrCode.start(
-                        cameraId[0].id,
-                        {
-                            fps: 10,
-                            qrbox: {
-                                width: width ?? 250,
-                                height: height ?? 200,
-                            },
+
+                    const onSuccess = (barcode: string) => {
+                        html5QrCode.stop()
+                        // await scrape({ barcode: barcode, storeName: 'ica' })
+                        router.push(`/result/ica/${barcode}/`)
+                    }
+
+                    const onFailure = (error: string) => {
+                        console.log(error)
+                    }
+
+                    const scannerConfig = {
+                        fps: 10,
+                        qrbox: {
+                            width: width ?? 250,
+                            height: height ?? 200,
                         },
-                        async () => {
-                            html5QrCode.stop()
-                        },
-                        (error) => {
-                            console.log(error)
-                        }
-                    )
+                    }
+
+                    if (
+                        /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                            navigator.userAgent
+                        )
+                    ) {
+                        html5QrCode.start(
+                            { facingMode: 'environment' },
+                            scannerConfig,
+                            onSuccess,
+                            onFailure
+                        )
+                    } else {
+                        html5QrCode.start(
+                            cameraId[0].id,
+                            scannerConfig,
+                            onSuccess,
+                            onFailure
+                        )
+                    }
                 } catch (error) {
                     console.log(
                         `The scanner did not respond due to the following error: ${error}`
@@ -49,17 +75,17 @@ export default function Scanner({ show, width, height }: ScannerProps) {
         }
     }, [show])
 
-    async function g() {
-        const a = await scraperApi({
-            storeName: 'ica',
-            // barcode: `4011800569518`,
-            barcode: `4011800569518`,
-        })
+    // async function g() {
+    //     const a = await scraperApi({
+    //         storeName: 'ica',
+    //         // barcode: `4011800569518`,
+    //         barcode: `4011800569518`,
+    //     })
 
-        console.log(a)
-    }
+    //     console.log(a)
+    // }
 
-    g()
+    // g()
 
     return (
         <div className={styles.container}>
