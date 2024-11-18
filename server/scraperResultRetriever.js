@@ -1,20 +1,41 @@
 'use server'
 
-import { spawn } from 'child_process'
+import child_process from 'child_process'
+import util from 'node:util'
 
 export default async function scraperResultRetriever(storeName, barcode) {
     // const MAXIMUM_ALLOWED_RESPONSE_TIME = 10000
 
-    const python = spawn(
-        'python',
-        ['server/scraper/scraper.py', storeName, barcode],
-        { shell: true }
+    // const python = spawn(
+    //     'python',
+    //     ['server/scraper/scraper.py', storeName, barcode],
+    //     { shell: true }
+    // )
+    let dataToSend = ''
+    const exec = util.promisify(child_process.exec)
+
+    const { stdout } = await exec(
+        `python server/scraper/scraper.py ${storeName} ${barcode}`
+        // (error, out) => {
+        //     if (error) {
+        //         console.error('exec error: ', error)
+        //     }
+
+        //     // console.log(out)
+        //     dataToSend += out
+        //     // console.log(dataToSend)
+        //     // return dataToSend
+        // }
     )
 
+    // console.log(stdout)
+
+    // console.log('test', dataToSend)
+
     // const dataToSend = python.stdout.read()
-    let dataToSend = ''
-    // python.stdout.on('data', (data) => {
+    // python.stdout.on('readable', (data) => {
     //     dataToSend += data
+    //     console.log(data)
     // })
 
     // const python = spawn('py', [
@@ -30,11 +51,11 @@ export default async function scraperResultRetriever(storeName, barcode) {
     //     }
     // }, MAXIMUM_ALLOWED_RESPONSE_TIME)
 
-    for await (const data of python.stdout) {
-        dataToSend += data
-    }
+    // for await (const data of python.stdout) {
+    //     dataToSend += data
+    // }
 
-    return dataToSend
+    return stdout
 }
 
 // () => {
