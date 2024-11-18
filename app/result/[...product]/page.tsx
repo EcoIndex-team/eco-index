@@ -1,6 +1,6 @@
 'use client'
 
-import scraperApi, { ScraperResponse } from '@/app/api/scraperApi'
+import scraperApi, { ScraperResponse } from '@/server/scraperApi'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
