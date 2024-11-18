@@ -18,9 +18,8 @@ const commonHarmfullIngredientsList = [
   'vete', 'havre', 'rxg', 'korn', 'ris', 'majs', 'rapsolja', 'mjxlk', 'kakao'
 ]
 
-export default async function scraperApi(firstScrape: Scrape) {
-  const data = await scraperResultRetriever(firstScrape.storeName, firstScrape.barcode)
-  // alert(data)
+export default async function scraperApi(storeName: StoreName | string, barcode: string) {
+  const data = await scraperResultRetriever(storeName, barcode)
   console.log(data)
   const productInfo: Data = JSON.parse(data)
   const ingredients =
@@ -43,9 +42,6 @@ export default async function scraperApi(firstScrape: Scrape) {
       allIngredientsIndication += commonHarmfullIngredientsIndication.get(item) ?? 1
     })
 
-  console.log(harmIndication)
-  console.log(allIngredientsIndication)
-
   const harmfullIngredientAmount = harmIndication / allIngredientsIndication
   const result = harmfullIngredientAmount <= 0.33 ? 'low' : harmfullIngredientAmount >= 0.66 ? 'high' : 'medium'
 
@@ -60,9 +56,8 @@ export default async function scraperApi(firstScrape: Scrape) {
   // return data
 }
 
-type Scrape = {
+type StoreName = {
   storeName: 'coop' | 'ica'
-  barcode: string
 }
 
 type Data = {

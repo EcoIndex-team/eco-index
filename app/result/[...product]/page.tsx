@@ -13,10 +13,7 @@ export default function Result() {
 
     useEffect(() => {
         async function activateScanner() {
-            const item = await scraperApi({
-                storeName: path.product[0],
-                barcode: path.product[1],
-            })!
+            const item = await scraperApi(path.product[0], path.product[1])!
 
             setItem(item)
         }

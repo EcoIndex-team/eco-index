@@ -84,7 +84,7 @@ class Stores:
       product_information["name"] = driver.find_element(by=By.CSS_SELECTOR, value="#product > div > div > h1").text
       product_information["img"] = driver.find_element(by=By.CSS_SELECTOR, value="img").get_attribute('src')
 
-      print(json.dumps(product_information))
+      print(product_information)
 
       Stores.__finish()
     except:
@@ -114,7 +114,7 @@ class Stores:
       product_information["name"] = name.text
       product_information["ingredients"] = ingredients.text
 
-      print(json.dumps(product_information))
+      print(product_information)
 
       Stores.__finish()
     except:

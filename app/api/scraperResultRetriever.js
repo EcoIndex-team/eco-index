@@ -3,6 +3,7 @@
 import { spawn } from 'child_process'
 
 export default async function scraperResultRetriever(storeName, barcode) {
+    // const MAXIMUM_ALLOWED_RESPONSE_TIME = 10000
     if (!barcode) return 'barcode'
 
     const python = spawn('py', [
@@ -11,6 +12,13 @@ export default async function scraperResultRetriever(storeName, barcode) {
         barcode,
     ])
     let dataToSend = ''
+
+    // setTimeout(() => {
+    //     if (!(dataToSend.length > 0)) {
+    //         python.kill()
+    //         return 'fail'
+    //     }
+    // }, MAXIMUM_ALLOWED_RESPONSE_TIME)
 
     for await (const data of python.stdout) {
         dataToSend += data
