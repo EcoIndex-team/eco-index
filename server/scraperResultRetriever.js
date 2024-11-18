@@ -15,7 +15,8 @@ export default async function scraperResultRetriever(storeName, barcode) {
     const exec = util.promisify(child_process.exec)
 
     const { stdout } = await exec(
-        `python server/scraper/scraper.py ${storeName} ${barcode}`
+        `python server/scraper/scraper.py ${storeName} ${barcode}`,
+        { shell: true }
         // (error, out) => {
         //     if (error) {
         //         console.error('exec error: ', error)
