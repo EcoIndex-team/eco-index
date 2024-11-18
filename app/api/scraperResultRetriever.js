@@ -8,7 +8,9 @@ export default async function scraperResultRetriever(storeName, barcode) {
     const python = spawn(
         'python',
         ['app/api/scraper/scraper.py', storeName, barcode],
-        { stdio: 'pipe' }
+        {
+            stdio: 'pipe',
+        }
     )
     // const python = spawn('py', [
     //     'app/api/scraper/scraper.py',
