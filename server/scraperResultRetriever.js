@@ -16,7 +16,7 @@ export default async function scraperResultRetriever(storeName, barcode) {
 
     const { stdout } = await exec(
         `python server/scraper/scraper.py ${storeName} ${barcode}`,
-        { shell: true }
+        { shell: 'PowerShell' }
         // (error, out) => {
         //     if (error) {
         //         console.error('exec error: ', error)
