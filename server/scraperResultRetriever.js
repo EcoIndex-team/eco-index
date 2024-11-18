@@ -11,10 +11,12 @@ export default async function scraperResultRetriever(storeName, barcode) {
         { shell: true }
     )
 
+    // const dataToSend = python.stdout.read()
     let dataToSend = ''
     // python.stdout.on('data', (data) => {
     //     dataToSend += data
     // })
+
     // const python = spawn('py', [
     //     'app/api/scraper/scraper.py',
     //     storeName,
