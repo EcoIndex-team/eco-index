@@ -1,5 +1,5 @@
 [functions]
-  python_script = "netlify/functions/scraper.py"
-
-[functions.scraper]
   runtime = "python3.13"
+
+  [functions.python_script]
+    python_script = "netlify/functions/scraper.py"
