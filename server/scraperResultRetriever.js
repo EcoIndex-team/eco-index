@@ -15,7 +15,7 @@ export default async function scraperResultRetriever(storeName, barcode) {
     const exec = util.promisify(child_process.exec)
 
     const { stdout } = await exec(
-        `python.exe server/scraper/scraper.py ${storeName} ${barcode}`
+        `python netlify/functions/scraper.py ${storeName} ${barcode}`
         // { shell: 'WindowsPowerShell' }
         // (error, out) => {
         //     if (error) {

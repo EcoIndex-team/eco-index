@@ -1,0 +1,5 @@
+[functions]
+  python_script = "netlify/functions/python_script.py"
+
+[functions.python_script]
+  runtime = "python3.13"
