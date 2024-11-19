@@ -1,27 +1,29 @@
 {
-  "name": "eco-index",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "html5-qrcode": "^2.3.8",
-    "next": "15.0.2",
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028",
-    "sass": "^1.80.6",
-    "scss": "^0.2.4"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.2",
-    "typescript": "^5"
-  }
+    "name": "eco-index",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "netlify": "netlify"
+    },
+    "dependencies": {
+        "html5-qrcode": "^2.3.8",
+        "next": "15.0.2",
+        "react": "19.0.0-rc-02c0e824-20241028",
+        "react-dom": "19.0.0-rc-02c0e824-20241028",
+        "sass": "^1.80.6",
+        "scss": "^0.2.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "eslint": "^8",
+        "eslint-config-next": "15.0.2",
+        "netlify-cli": "^17.37.2",
+        "typescript": "^5"
+    }
 }
