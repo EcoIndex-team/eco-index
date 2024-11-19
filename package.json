@@ -11,19 +11,24 @@
     },
     "dependencies": {
         "html5-qrcode": "^2.3.8",
+        "mocha": "^10.8.2",
         "next": "15.0.2",
         "react": "19.0.0-rc-02c0e824-20241028",
         "react-dom": "19.0.0-rc-02c0e824-20241028",
         "sass": "^1.80.6",
-        "scss": "^0.2.4"
+        "scss": "^0.2.4",
+        "selenium-manager": "^0.4.3"
     },
     "devDependencies": {
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
+        "@types/selenium-webdriver": "^4.1.27",
         "eslint": "^8",
         "eslint-config-next": "15.0.2",
         "netlify-cli": "^17.37.2",
+        "selenium-webdriver": "^4.26.0",
         "typescript": "^5"
-    }
+    },
+    "packageManager": "pnpm@9.13.2+sha512.88c9c3864450350e65a33587ab801acf946d7c814ed1134da4a924f6df5a2120fd36b46aab68f7cd1d413149112d53c7db3a4136624cfd00ff1846a0c6cef48a"
 }

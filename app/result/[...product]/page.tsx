@@ -1,6 +1,6 @@
 'use client'
 
-import scraperApi, { ScraperResponse } from '@/server/scraperApi'
+import scraperApi, { ScraperResponse } from '@/eee/scraperApi'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
@@ -15,7 +15,7 @@ export default function Result() {
         async function activateScanner() {
             const item = await scraperApi(path.product[0], path.product[1])!
 
-            setItem(item)
+            // setItem(item)
         }
         activateScanner()
     }, [])

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Scanner.module.scss'
 import { Html5Qrcode } from 'html5-qrcode'
-import scraperApi from '../../server/scraperApi'
+import scraperApi from '../../eee/scraperApi'
 // import { useScanner } from '@/hooks/useScanner'
 import { useRouter } from 'next/navigation'
 
