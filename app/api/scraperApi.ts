@@ -1,5 +1,5 @@
-import { run } from "./sc.js"
-// import scraperResultRetriever from "./scraperResultRetriever"
+// import { run } from "./sc.js"
+import scraperResultRetriever from "./scraperResultRetriever"
 
 // const levelsOfHarm = new Map([
 //   ['lxg risk', 1],
@@ -20,8 +20,8 @@ const commonHarmfullIngredientsList = [
 ]
 
 export default async function scraperApi(storeName: StoreName | string, barcode: string) {
-  // const data = await scraperResultRetriever(storeName, barcode)
-  const data = await run()
+  const data = await scraperResultRetriever(storeName as string, barcode)
+  // const data = await run()
   console.log(data)
   // const productInfo: Data = JSON.parse(data)
   // const ingredients =

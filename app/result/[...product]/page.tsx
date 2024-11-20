@@ -1,10 +1,11 @@
 'use client'
 
-import scraperApi, { ScraperResponse } from '@/eee/scraperApi'
+// import scraperApi, { ScraperResponse } from '@/eee/scraperApi'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import s from './result.module.scss'
+import scraperApi, { ScraperResponse } from '@/app/api/scraperApi'
 
 export default function Result() {
     const path = useParams<{ product: ['coop' | 'ica', string] }>()
