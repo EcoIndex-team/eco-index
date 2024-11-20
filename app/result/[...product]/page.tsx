@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import s from './result.module.scss'
-import scraperApi, { ScraperResponse } from '@/app/api/scraperApi'
+import scraperApi, { ScraperResponse } from '@/placeholder/scraperApi'
 
 export default function Result() {
     const path = useParams<{ product: ['coop' | 'ica', string] }>()
@@ -14,8 +14,11 @@ export default function Result() {
 
     useEffect(() => {
         async function activateScanner() {
-            const item = await scraperApi(path.product[0], path.product[1])!
+            // const item = await scraperApi(path.product[0], path.product[1])!
+            const t = await fetch('/api')
+            // const e = await t.headers
 
+            console.log(t)
             // setItem(item)
         }
         activateScanner()
