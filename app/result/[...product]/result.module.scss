@@ -71,3 +71,25 @@
         }
     }
 }
+
+@keyframes spin {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding-inline: 2rem;
+
+    img {
+        animation: infinite 5s spin forwards linear;
+    }
+}

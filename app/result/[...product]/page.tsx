@@ -1,11 +1,13 @@
 'use client'
 
-// import scraperApi, { ScraperResponse } from '@/eee/scraperApi'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import s from './result.module.scss'
-import scraperApi, { ScraperResponse } from '@/placeholder/scraperApi'
+import itemResultConverter, {
+    ScraperResponse,
+} from '@/app/result/api/scraper/itemResultConverter'
+import loadingImg from '@/public/images/xTg67EpLc-removebg-preview.png'
 
 export default function Result() {
     const path = useParams<{ product: ['coop' | 'ica', string] }>()
@@ -14,12 +16,11 @@ export default function Result() {
 
     useEffect(() => {
         async function activateScanner() {
-            // const item = await scraperApi(path.product[0], path.product[1])!
-            const t = await fetch('/api')
-            // const e = await t.headers
-
-            console.log(t)
-            // setItem(item)
+            const item = await itemResultConverter(
+                path.product[0],
+                path.product[1]
+            )
+            setItem(item)
         }
         activateScanner()
     }, [])
@@ -39,6 +40,12 @@ export default function Result() {
             </div>
         </div>
     ) : (
-        <p>Gathering information and calculating impact...</p>
+        <div className={s.loading}>
+            <Image width={200} src={loadingImg} alt='' />
+            <p>
+                Gathering information and calculating impact, this might take a
+                few seconds...
+            </p>
+        </div>
     )
 }
